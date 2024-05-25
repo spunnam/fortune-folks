@@ -31,20 +31,25 @@ app.set("view engine", "ejs");
 ////////////////////////////////////////////
 //Connecting to the MongoDB Altas Database//
 ////////////////////////////////////////////
-const connURL = process.env.DB_URL;
+// Construct the MongoDB URI
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PWD;
+const dbName = process.env.DB_NAME;
+// const uri = `mongodb+srv://${dbUser}:${dbPassword}@fortunefolkscluster.rnom8q6.mongodb.net/?retryWrites=true&w=majority&appName=fortuneFolksCluster`;
+const uri = `mongodb+srv://${dbUser}:${dbPassword}@fortunefolkscluster.rnom8q6.mongodb.net/?retryWrites=true&w=majority&appName=fortuneFolksCluster`;
 
-mongoose.connect(connURL, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useCreateIndex: true,
-});
 
-const con = mongoose.connection;
-con.on("open", () => {
-	console.log("Connected To Database");
-});
+// Connect to MongoDB
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB...');
+  })
+  .catch(err => {
+    console.error('Error connecting to MongoDB:', err.message);
+  });
 
-///////////////////////////////////////////////
+
+///////////////////////////////////////////////`
 //////////////Setting up routes////////////////
 //////////////////////////////////////////////
 const routes = require("./routes/routes.js");

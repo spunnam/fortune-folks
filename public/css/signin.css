@@ -10,6 +10,13 @@ input {
   font-family: "Montserrat", sans-serif;
 }
 
+.error-message {
+  text-transform: uppercase;
+  border: #333;
+  height: '33';
+  text-align: center;
+}
+
 .container {
   position: relative;
   width: 100%;
